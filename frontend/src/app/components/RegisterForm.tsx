@@ -29,9 +29,11 @@ const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.registerForm}>
+      <div className={styles.container}>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name" className={styles.label}>Name:</label>
         <input
+        className={styles.input}
           type="text"
           id="name"
           value={name}
@@ -41,8 +43,9 @@ const RegisterForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email" className={styles.label}>Email:</label>
         <input
+        className={styles.input}
           type="email"
           id="email"
           value={email}
@@ -52,8 +55,9 @@ const RegisterForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" className={styles.label}>Password:</label>
         <input
+        className={styles.input}
           type="password"
           id="password"
           value={password}
@@ -62,9 +66,11 @@ const RegisterForm = () => {
           aria-required="true"
         />
       </div>
+      </div>
       {error && <p className={styles.error}>{error}</p>}
       {success && <p className={styles.success}>{success}</p>}
       <button type="submit" className={styles.button}>Register</button>
+      
     </form>
   );
 };

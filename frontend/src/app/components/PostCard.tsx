@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Datum } from '../interface/post';
 import { addLike, getLikesForPost } from '../controllers/like.controllers'; 
-import '../styles/post.module.css';
+import  styles  from '../styles/post.module.css';
 
 const PostCard: React.FC<{
   post: Datum;
@@ -49,30 +49,30 @@ const PostCard: React.FC<{
     }
   };
   return (
-    <figure className="card col-4">
-      <h2 className="card-title text-center">{post.title}</h2>
-      <h4 className="card-title text-center">Author: </h4> {/* Placeholder for author */}
-      <figcaption className="card-body bg-light text-dark">
-        <h5 className="card-title text-center">{post.description}</h5>
-        <p className="card-text text-center">Summary goes here</p> {/* Placeholder for summary */}
-        <h6 className="card-title text-center">Publication Date</h6> {/* Placeholder for publication date */}
-        <div className="d-flex">
+    <figure className={styles.card}>
+      <h2 className={styles.title}>{post.title}</h2>
+      <h4 className={styles.author}>Author: {/* Placeholder for author */}</h4>
+      <figcaption className={styles.body}>
+        <h5 className={styles.description}>{post.description}</h5>
+        <p className={styles.summary}>Summary goes here {/* Placeholder for summary */}</p>
+        <h6 className={styles.date}>Publication Date {/* Placeholder for publication date */}</h6>
+        <div className={styles.buttons}>
           <button
-            className="btn btn-warning"
+            className={`${styles.button} ${styles.warning}`}
             type="button"
             onClick={() => onEdit(post.id)}
           >
             Edit
           </button>
           <button
-            className="btn btn-danger"
+            className={`${styles.button} ${styles.danger}`}
             type="button"
             onClick={() => onDelete(post.id)}
           >
             Delete
           </button>
           <button
-            className="btn btn-primary ml-2"
+            className={`${styles.button} ${styles.primary}`}
             type="button"
             onClick={handleLike}
           >

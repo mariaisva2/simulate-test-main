@@ -4,8 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { getAllPosts, createPost, updatePost, deletePost } from '../controllers/post.controllers';
 import { Datum, BodyRequestCreatePost, BodyrequestUpdatePost } from '../interface/post';
 import PostCard from './PostCard';
-import '../styles/post.module.css';
+import styles from '../styles/post.module.css';
 
+import Input from "./input";
+import TextArea from "./textArea";
+import Button from "./button";
 
 const PostForm: React.FC = () => {
   const [posts, setPosts] = useState<Datum[]>([]);
@@ -147,17 +150,17 @@ const PostForm: React.FC = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1 className="mb-4">Posts Management</h1>
+<div className={styles.container}>
+      <h1 className={styles.heading}>Posts Management</h1>
 
       {/* Form for creating/editing a post */}
-      <form onSubmit={isEditing ? handleEditPost : handleCreatePost} className="mb-4">
+      <form onSubmit={isEditing ? handleEditPost : handleCreatePost} className={styles.form}>
         <h2>{isEditing ? 'Edit Post' : 'Create New Post'}</h2>
-        <div className="mb-3">
-          <label htmlFor="title" className="form-label">Title:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="title" className={styles.formLabel}>Title:</label>
           <input
             type="text"
-            className="form-control"
+            className={styles.formControl}
             id="title"
             name="title"
             value={formData.title}
@@ -165,10 +168,10 @@ const PostForm: React.FC = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">Description:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="description" className={styles.formLabel}>Description:</label>
           <textarea
-            className="form-control"
+            className={styles.formControl}
             id="description"
             name="description"
             value={formData.description}
@@ -176,11 +179,11 @@ const PostForm: React.FC = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="user_id" className="form-label">User ID:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="user_id" className={styles.formLabel}>User ID:</label>
           <input
             type="text"
-            className="form-control"
+            className={styles.formControl}
             id="user_id"
             name="user_id"
             value={formData.user_id}
@@ -188,13 +191,13 @@ const PostForm: React.FC = () => {
             required
           />
         </div>
-        {error && <div className="alert alert-danger">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
-        <button type="submit" className="btn btn-primary" disabled={isLoading}>
+        {error && <div className={styles.alertError}>{error}</div>}
+        {success && <div className={styles.alertSuccess}>{success}</div>}
+        <button type="submit" className={`${styles.btn} ${styles.btnPrimary}`} disabled={isLoading}>
           {isLoading ? 'Processing...' : (isEditing ? 'Update Post' : 'Create Post')}
         </button>
         {isEditing && (
-          <button type="button" className="btn btn-secondary ml-2" onClick={() => setIsEditing(false)}>
+          <button type="button" className={`${styles.btn} ${styles.btnSecondary}`} onClick={() => setIsEditing(false)}>
             Cancel
           </button>
         )}
@@ -205,17 +208,17 @@ const PostForm: React.FC = () => {
       {isLoading ? (
         <p>Loading posts...</p>
       ) : error ? (
-        <div className="alert alert-danger">{error}</div>
-      ) : Array.isArray(posts) && posts.length === 0 ? ( // Check if posts is an array
+        <div className={styles.alertError}>{error}</div>
+      ) : Array.isArray(posts) && posts.length === 0 ? (
         <p>No posts available</p>
       ) : (
-        <div className="row">
-          {Array.isArray(posts) && posts.map((post) => ( // Check if posts is an array before mapping
-            <div key={post.id} className="col-md-4 mb-3">
+        <div className={styles.postsContainer}>
+          {Array.isArray(posts) && posts.map((post) => (
+            <div key={post.id} className={styles.postCard}>
               <PostCard
                 post={post}
-                onEdit={handleSelectPost}
-                onDelete={handleDeletePost}
+                onEdit={() => handleSelectPost(post.id)}
+                onDelete={() => handleDeletePost(post.id)}
               />
             </div>
           ))}

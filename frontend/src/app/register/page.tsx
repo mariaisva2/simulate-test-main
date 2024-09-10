@@ -1,12 +1,16 @@
 // app/login/page.tsx
 import RegisterForm from '../components/RegisterForm';
-
+import { Navbar } from '../components/navBar';
 
 
 const registerPage = () => {
+  const links = [
+    {href: "/login", name : "Login"},
+    {href: "/", name : "home page"}
+  ]
   return (
     <div>
-      <h1>register</h1>
+      <Navbar links={links} />
       <RegisterForm />
     </div>
   );

@@ -5,7 +5,7 @@ import styles from '../styles/login.module.css';
 import { authenticateUser } from '../controllers/login.controllers';
 import Input from './input';
 import Button from './button';
-import "../styles/login.module.css";
+import "./styles/login.css"; 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
